@@ -1,0 +1,31 @@
+.comment {
+	border-bottom: solid 1px #CCC;
+	padding: 5px 0px;
+	margin-bottom: 10px;
+}
+
+.comment p {
+	margin: 4px 0px;
+}
+
+.comment .admin {
+	display: none;
+}
+
+.comment.hover  {
+	background: #FAFAFA;
+}
+
+.comment.hover .admin {
+	display: inline;
+}
+
+.created {
+	font-style: italic;
+}
+.avatar {
+	height: 100px;
+	width: 100px;
+	background-color: #7F7F7F;
+}
+	

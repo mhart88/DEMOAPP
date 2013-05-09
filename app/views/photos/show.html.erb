@@ -1,0 +1,54 @@
+  </br>
+  </br>
+  </br>
+
+<div class="row">
+		 	<div class="span12">
+		 		<div class="photo">
+		 			<% if @photo.name != "" %>
+		 			<div class= "photo_title">" <%= @photo.name %> "</div>
+			 	  	<% end %>
+			 	  	<div class="photo_image"><%= image_tag @photo.image_url(:large).to_s %></div>
+
+					<p><%= @photo.story %></p>
+
+					<% if user_signed_in? %>
+						 <%= link_to raw('<i class="icon-circle-arrow-left"></i> back'), :back %>  
+							
+							<% if current_user.id == @photo.user_id || current_user.try(:admin?) %>
+									| <%= link_to raw('<i class="icon-edit"></i> edit'), edit_photo_path(@photo) %> |	<%= link_to raw('<i class="icon-trash"></i> delete'), @photo, confirm: 'Are you sure?', method: :delete %>
+							<% end %>
+							| by <%= link_to @photo.user.profile_name, profile_path(@photo.user) %>
+							<% if @photo.url != "" %>
+								| <%= link_to raw('<i class="icon-external-link"></i> source'), @photo.url %>
+							<% end %>
+					<% else %>
+						<%= link_to raw('<i class="icon-circle-arrow-left"></i> back'), :back %> | by <%= link_to @photo.user.profile_name, profile_path(@photo.user) %> | 
+						<% if @photo.url != "" %>
+							| <%= link_to raw('<i class="icon-external-link"></i> source'), @photo.url %>
+						<% end %>
+					<% end %>
+
+				</div>
+			</div>
+		<%= render "comments/comments" %>
+		<div class="span12">
+			<div class= "align"><%= render "comments/form" %></div>
+		</div>
+		
+			<% if current_user.try(:admin?) %>
+				<div class="span3 offset1">
+					<%= simple_form_for @photo do |f| %>
+						<%= f.input :home_page,  as: :radio_buttons %>
+						<%= f.input :rank %>
+						<%= f.button :submit %>
+					<% end %>
+				</div>
+				<div class="span7 offset1">
+					<%= @photo.inspect %>
+				</div>
+			<% end %>
+		
+</div>
+
+	
